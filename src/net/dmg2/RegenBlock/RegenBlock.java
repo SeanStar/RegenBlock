@@ -28,6 +28,7 @@ public class RegenBlock extends JavaPlugin {
 	//HashMaps to store player's selections
 	public HashMap<String, Location> playerSelectionLeft = new HashMap<String, Location>();
 	public HashMap<String, Location> playerSelectionRight = new HashMap<String, Location>();
+	public ArrayList<String> playerSelectionStatus = new ArrayList<String>();
 	public ArrayList<String> playerEditStatus = new ArrayList<String>();
 	//---------------------------------------------------------------------------------------------
 	

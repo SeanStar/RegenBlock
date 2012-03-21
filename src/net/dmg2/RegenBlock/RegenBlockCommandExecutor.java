@@ -112,7 +112,7 @@ public class RegenBlockCommandExecutor implements CommandExecutor{
 		
 		//=============================================================================================================================
 		//First Argument - SELECT  
-		/* if (args[0].equalsIgnoreCase("select")) {
+		if (args[0].equalsIgnoreCase("select")) {
 			//Check if player's status
 			if (plugin.playerSelectionStatus.contains(player.getName())) {
 				//If it does - remove from the list - turn off the mode
@@ -126,7 +126,7 @@ public class RegenBlockCommandExecutor implements CommandExecutor{
 				plugin.log.sendPlayerNormal(player, "Selection mode is ON");
 			}
 			return true;
-		} */
+		}
 
 		//=============================================================================================================================
 		//First Argument - REGION

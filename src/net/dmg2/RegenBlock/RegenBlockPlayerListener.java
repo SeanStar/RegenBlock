@@ -33,7 +33,7 @@ public class RegenBlockPlayerListener implements  Listener {
 		
 		//If player is not using selection tool, return.
 		int toolType = event.getPlayer().getItemInHand().getTypeId();
-		if (plugin.config.getToolID() != toolType) {
+		if (plugin.config.getToolID() != toolType || plugin.playerSelectionStatus.contains(event.getPlayer().getName()) == false) {
 			return;
 		}
 		
