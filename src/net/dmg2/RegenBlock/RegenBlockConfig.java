@@ -29,7 +29,6 @@ public class RegenBlockConfig {
 		this.configDefaultsHash.put("settings.enableResourceSaver", false);
 		this.configDefaultsHash.put("settings.checkTime", 300);
 		this.configDefaultsHash.put("settings.enableLeavesDecayRegen", true);
-		this.configDefaultsHash.put("settings.enableConsoleLogging", true);
 		this.configDefaultsHash.put("settings.selectionToolID", 268);
 		
 		//Check if configuration file exists
@@ -61,10 +60,6 @@ public class RegenBlockConfig {
 			
 			if (this.config.getString("settings.enableLeavesDecayRegen") == null) {
 				this.config.set("settings.enableLeavesDecayRegen", this.configDefaultsHash.get("settings.enableLeavesDecayRegen"));
-			}
-			
-			if (this.config.getString("settings.enableConsoleLogging") == null) {
-				this.config.set("settings.enableConsoleLogging", this.configDefaultsHash.get("settings.enableConsoleLogging"));
 			}
 			
 			if (this.config.getString("settings.selectionToolID") == null) {
@@ -162,7 +157,6 @@ public class RegenBlockConfig {
 	public boolean getResourceSaverEnabled() { return this.config.getBoolean("settings.enableResourceSaver"); }
 	public long getResourceSaverTime() { return this.config.getLong("settings.checkTime"); }
 	public boolean getLeavesDecayRegenEnabled() { return this.config.getBoolean("settings.enableLeavesDecayRegen"); }
-	public boolean getConsoleLoggingEnabled() { return this.config.getBoolean("settings.enableConsoleLogging"); }
 	public int getToolID() { return this.config.getInt("settings.selectionToolID"); }
 	public int getBlockX(String worldName, String blockName) { return this.config.getInt("blocksToRegen." + worldName + "." + blockName + ".X"); }
 	public int getBlockY(String worldName, String blockName) { return this.config.getInt("blocksToRegen." + worldName + "." + blockName + ".Y"); }

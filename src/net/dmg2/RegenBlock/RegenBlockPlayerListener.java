@@ -69,7 +69,7 @@ public class RegenBlockPlayerListener implements  Listener {
 	@EventHandler
 	public void onPlayerChangedWorld (PlayerChangedWorldEvent event) {
 		//Clear selection points on player world change
-		if(plugin.config.getConsoleLoggingEnabled() == true) {
+		if (this.plugin.doDebug) {
 		plugin.log.sendPlayerNormal(event.getPlayer(), "World changed. Points cleared.");
 		plugin.log.info(event.getPlayer().getName() + " changed world. Points cleared.");
 		}
@@ -83,7 +83,7 @@ public class RegenBlockPlayerListener implements  Listener {
 	public void onPlayerJoin (PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		//Log join info
-		if(plugin.config.getConsoleLoggingEnabled() == true) {
+		if (this.plugin.doDebug) {
 		plugin.log.info(player.getName() + " joined. Lists cleaned up.");
 		}
 		//Remove player from all lists
@@ -97,7 +97,7 @@ public class RegenBlockPlayerListener implements  Listener {
 	public void onPlayerQuit (PlayerQuitEvent event) {
 		Player player = event.getPlayer();
 		//Log quit info
-		if(plugin.config.getConsoleLoggingEnabled() == true) {
+		if (this.plugin.doDebug) {
 		plugin.log.info(player.getName() + " left. Lists cleaned up.");
 		}
 		//Remove player from all lists
