@@ -1,0 +1,18 @@
+RegenBlock Beta 3.4 Unofficial Fork
+
+Changelog
+3.2:
+- Added leavesdecay event
+- Added regions type 2
+
+3.3
+- Added config options for leaves decay, resource saver, and console logging
+- Added Resource Saving option
+- Added Console logging option
+
+3.4
+- Added regions type 3
+- Changed selection from command to tool, configurable in config.
+- Changed ConsoleLogging option to standard debug command
+
+
