@@ -21,13 +21,13 @@ public class RegenBlock extends JavaPlugin {
 	public ArrayList<RegenBlockTBlock> blocksToRegen = new ArrayList<RegenBlockTBlock>();
 	public long processRespawnQueueTime = System.currentTimeMillis();
 	public boolean doDebug = false;
+	public boolean isDecayEventBlock = false; 
 	//=============================================================================================
 	
 	//---------------------------------------------------------------------------------------------
 	//HashMaps to store player's selections
 	public HashMap<String, Location> playerSelectionLeft = new HashMap<String, Location>();
 	public HashMap<String, Location> playerSelectionRight = new HashMap<String, Location>();
-	public ArrayList<String> playerSelectionStatus = new ArrayList<String>();
 	public ArrayList<String> playerEditStatus = new ArrayList<String>();
 	//---------------------------------------------------------------------------------------------
 	

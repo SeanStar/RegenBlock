@@ -41,6 +41,7 @@ public class RegenBlockBlockListener implements  Listener {
 		if(isPlayerEditor(event.getPlayer().getName())) return;
 		
 		//Restore the block
+		plugin.isDecayEventBlock = false;
 		regenBlock(event.getBlock(), event.getBlock().getType(), event.getPlayer());
 	}
 	//##########################################################################################################
@@ -53,14 +54,15 @@ public class RegenBlockBlockListener implements  Listener {
 
 		//Restore the block
 		event.getEventName();
+		plugin.isDecayEventBlock = false;
 		regenBlock(event.getBlock(), Material.AIR, event.getPlayer());
 	}
 	//##########################################################################################################
-
 	@EventHandler
 	public void onLeavesDecay(LeavesDecayEvent event) {
 		if(event.isCancelled()) return; //========================
 		if(plugin.config.getLeavesDecayRegenEnabled() == true) {
+		plugin.isDecayEventBlock = true;
 		regenBlock(event.getBlock(), Material.LEAVES, null);
 		}
 	}
@@ -107,7 +109,8 @@ public class RegenBlockBlockListener implements  Listener {
 		//----------------------------------------------------------------------------
 		// Check what region type this is. Normal will be 0 or null if nothing present
 		// but we never check for that.
-		if (regionType == 1) {
+		//If the region type is 1 or 3, randomize material.
+		if (regionType == 1 || regionType == 3) {
 			//Mine region
 			//Randomize regen block if not air
 			if (material != Material.AIR) {
@@ -141,17 +144,16 @@ public class RegenBlockBlockListener implements  Listener {
 			}
 			
 		}
-		//If the region type is 2, set to regenerate all at once
-		if (regionType == 2) {
+		//If the region type is 2 or 3, set to regenerate all at once
+		if (regionType == 2 || regionType == 3) {
 			//Set block respawn time to the next closest time divisible by respawn time set
 			respawnTime = ((System.currentTimeMillis()/(respawnTime*1000)) +1)*respawnTime*1000;
-			
 		}
 		//----------------------------------------------------------------------------
 		
 
 		//Message the player based on region's feedback type
-		if ((this.plugin.config.getRegionFeedbackID(regionName) == 1 && material == Material.AIR) || this.plugin.config.getRegionFeedbackID(regionName) == 2) {
+		if ((this.plugin.config.getRegionFeedbackID(regionName) == 1 && material == Material.AIR) || this.plugin.config.getRegionFeedbackID(regionName) == 2 && plugin.isDecayEventBlock == false) {
 			Pattern pat = Pattern.compile("TIME");
 			Matcher mat = pat.matcher(this.plugin.config.getFeedbackString());
 			this.plugin.log.sendPlayerWarn(player, mat.replaceAll(String.valueOf(plugin.config.getRegionRespawnTime(regionName))));					

@@ -12,12 +12,13 @@ public class RegenBlockEntityListener implements  Listener {
 		this.plugin = instance;
 	}
 	//============================================================
-	
+	/* This seems rather pointless and stupid...
 	@EventHandler
 	public void onExplosionPrime(ExplosionPrimeEvent event){
 		if (event.isCancelled()) return; //=======================
 
 		plugin.getServer().broadcastMessage("HI! TNT is set on fire! omg!!");
 	}
+	*/
 
 }

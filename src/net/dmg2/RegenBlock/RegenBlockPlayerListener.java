@@ -31,10 +31,13 @@ public class RegenBlockPlayerListener implements  Listener {
 	public void onPlayerInteract (PlayerInteractEvent event) {
 		if (event.isCancelled()) return; //=======================
 		
-		//If player is not in the selection mode return
-		if (plugin.playerSelectionStatus.contains(event.getPlayer().getName()) == false) return;
-
-		//Grab variables from the event
+		//If player is not using selection tool, return.
+		int toolType = event.getPlayer().getItemInHand().getTypeId();
+		if (plugin.config.getToolID() != toolType) {
+			return;
+		}
+		
+		//Grab other variables from the event
 		Player player = event.getPlayer();
 		Location loc = event.getClickedBlock().getLocation();
 		Action action = event.getAction();
@@ -86,7 +89,6 @@ public class RegenBlockPlayerListener implements  Listener {
 		//Remove player from all lists
 		plugin.playerSelectionLeft.remove(player.getName());
 		plugin.playerSelectionRight.remove(player.getName());
-		plugin.playerSelectionStatus.remove(player.getName());
 		plugin.playerEditStatus.remove(event.getPlayer().getName());
 	}
 	
@@ -101,7 +103,6 @@ public class RegenBlockPlayerListener implements  Listener {
 		//Remove player from all lists
 		plugin.playerSelectionLeft.remove(player.getName());
 		plugin.playerSelectionRight.remove(player.getName());
-		plugin.playerSelectionStatus.remove(player.getName());
 		plugin.playerEditStatus.remove(event.getPlayer().getName());
 	}
 
@@ -157,16 +158,19 @@ public class RegenBlockPlayerListener implements  Listener {
 			if (this.plugin.doDebug) {
 				plugin.log.info("Type under " + plugin.getServer().getWorld(curBlock.getWorldName()).getBlockAt(curBlock.getX(), curBlock.getY() - 1, curBlock.getZ()).getType());
 				plugin.log.info("Time is over " + (curBlock.getRespawnTime() < System.currentTimeMillis()));
-				plugin.log.info("Type is 1 " + (this.plugin.config.getRegionType(curBlock.getRegionName()) == 1));
+				plugin.log.info("Type is 1 or 3 " + (this.plugin.config.getRegionType(curBlock.getRegionName()) == 1 || this.plugin.config.getRegionType(curBlock.getRegionName()) == 3));
 				plugin.log.info("Underblock is not air " + (plugin.getServer().getWorld(curBlock.getWorldName()).getBlockAt(curBlock.getX(), curBlock.getY() - 1, curBlock.getZ()).getType() != Material.AIR));
 				}
 			
 			
 			
-			if ( (curBlock.getRespawnTime() < System.currentTimeMillis() && this.plugin.config.getRegionType(curBlock.getRegionName()) == 0 ) ||
-					(curBlock.getRespawnTime() < System.currentTimeMillis() && this.plugin.config.getRegionType(curBlock.getRegionName()) == 2 ) ||
-					(curBlock.getRespawnTime() < System.currentTimeMillis() && this.plugin.config.getRegionType(curBlock.getRegionName()) == 1 &&
-							plugin.getServer().getWorld(curBlock.getWorldName()).getBlockAt(curBlock.getX(), curBlock.getY() - 1, curBlock.getZ()).getType() != Material.AIR) ) {
+			if ((curBlock.getRespawnTime() < System.currentTimeMillis() && this.plugin.config.getRegionType(curBlock.getRegionName()) == 0 ) ||
+				(curBlock.getRespawnTime() < System.currentTimeMillis() && this.plugin.config.getRegionType(curBlock.getRegionName()) == 2 ) ||
+				(curBlock.getRespawnTime() < System.currentTimeMillis() && this.plugin.config.getRegionType(curBlock.getRegionName()) == 1 &&
+				plugin.getServer().getWorld(curBlock.getWorldName()).getBlockAt(curBlock.getX(), curBlock.getY() - 1, curBlock.getZ()).getType() != Material.AIR) ||
+				(curBlock.getRespawnTime() < System.currentTimeMillis() && this.plugin.config.getRegionType(curBlock.getRegionName()) == 3 &&
+				plugin.getServer().getWorld(curBlock.getWorldName()).getBlockAt(curBlock.getX(), curBlock.getY() - 1, curBlock.getZ()).getType() != Material.AIR)
+					) {
 				
 				if (plugin.doDebug) plugin.log.info("Respawning block " + curBlock);
 				//Link it to an actual block in the world
