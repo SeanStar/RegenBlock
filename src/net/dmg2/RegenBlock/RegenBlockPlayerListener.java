@@ -66,8 +66,10 @@ public class RegenBlockPlayerListener implements  Listener {
 	@EventHandler
 	public void onPlayerChangedWorld (PlayerChangedWorldEvent event) {
 		//Clear selection points on player world change
+		if(plugin.config.getConsoleLoggingEnabled() == true) {
 		plugin.log.sendPlayerNormal(event.getPlayer(), "World changed. Points cleared.");
 		plugin.log.info(event.getPlayer().getName() + " changed world. Points cleared.");
+		}
 		plugin.playerSelectionLeft.remove(event.getPlayer().getName());
 		plugin.playerSelectionRight.remove(event.getPlayer().getName());
 		plugin.playerEditStatus.remove(event.getPlayer().getName());
@@ -78,7 +80,9 @@ public class RegenBlockPlayerListener implements  Listener {
 	public void onPlayerJoin (PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		//Log join info
+		if(plugin.config.getConsoleLoggingEnabled() == true) {
 		plugin.log.info(player.getName() + " joined. Lists cleaned up.");
+		}
 		//Remove player from all lists
 		plugin.playerSelectionLeft.remove(player.getName());
 		plugin.playerSelectionRight.remove(player.getName());
@@ -91,7 +95,9 @@ public class RegenBlockPlayerListener implements  Listener {
 	public void onPlayerQuit (PlayerQuitEvent event) {
 		Player player = event.getPlayer();
 		//Log quit info
+		if(plugin.config.getConsoleLoggingEnabled() == true) {
 		plugin.log.info(player.getName() + " left. Lists cleaned up.");
+		}
 		//Remove player from all lists
 		plugin.playerSelectionLeft.remove(player.getName());
 		plugin.playerSelectionRight.remove(player.getName());
@@ -153,7 +159,7 @@ public class RegenBlockPlayerListener implements  Listener {
 				plugin.log.info("Time is over " + (curBlock.getRespawnTime() < System.currentTimeMillis()));
 				plugin.log.info("Type is 1 " + (this.plugin.config.getRegionType(curBlock.getRegionName()) == 1));
 				plugin.log.info("Underblock is not air " + (plugin.getServer().getWorld(curBlock.getWorldName()).getBlockAt(curBlock.getX(), curBlock.getY() - 1, curBlock.getZ()).getType() != Material.AIR));
-			}
+				}
 			
 			
 			

@@ -56,10 +56,13 @@ public class RegenBlockBlockListener implements  Listener {
 		regenBlock(event.getBlock(), Material.AIR, event.getPlayer());
 	}
 	//##########################################################################################################
+
 	@EventHandler
 	public void onLeavesDecay(LeavesDecayEvent event) {
 		if(event.isCancelled()) return; //========================
+		if(plugin.config.getLeavesDecayRegenEnabled() == true) {
 		regenBlock(event.getBlock(), Material.LEAVES, null);
+		}
 	}
 	//##########################################################################################################
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ EVENTS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
